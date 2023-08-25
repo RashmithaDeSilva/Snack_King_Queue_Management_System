@@ -4,8 +4,13 @@ import java.util.Scanner;
 
 public class SnackKingQueueManagementSystem {
 
+    private Boolean[] q1 = {false, false};
+    private Boolean[] q2 = {false, false, false};
+    private Boolean[] q3 = {false, false, false, false, false};
+
     // Main method -----------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
+
         SnackKingQueueManagementSystem SKQMS_obj = new SnackKingQueueManagementSystem();
         boolean runProgram = true;
 
@@ -97,5 +102,11 @@ public class SnackKingQueueManagementSystem {
     }
 
 
-    
+    // View all queues (100 or VFQ)
+    private void viewAllQueues() {
+        printWindowName("View All Queues ");
+        for (int i=0;i<q3.length;i++) {
+            
+        }
+    }
 }
