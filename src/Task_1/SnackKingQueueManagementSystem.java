@@ -1,9 +1,12 @@
 package Task_1;
-
-import java.util.Arrays;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class SnackKingQueueManagementSystem {
+
+public class SnackKingQueueManagementSystem implements Serializable {
 
     private String[] q1 = new String[2];
     private String[] q2 = new String[3];
@@ -37,7 +40,7 @@ public class SnackKingQueueManagementSystem {
                     SKQMS_obj.sortedNames();
                     break;
                 case "106", "SPD":
-                    System.out.println("106");
+                    SKQMS_obj.storeProgramDataIntoFile(SKQMS_obj);
                     break;
                 case "107", "LPD":
                     System.out.println("107");
@@ -488,5 +491,25 @@ public class SnackKingQueueManagementSystem {
         }
         System.out.println("\n");
     }
+
+
+    // Store program data into file (106 or SPD) -----------------------------------------------------------------------
+    private void storeProgramDataIntoFile(SnackKingQueueManagementSystem SKQMS) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("Data-file.txt");
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+                objectOutputStream.writeObject(SKQMS);
+                System.out.println("\tSuccessfully save data into file");
+        } catch (IOException e) {
+            System.out.println("\terror occurred try again !");
+        }
+    }
+
+
+    
+
+
+
+
+
 
 }
