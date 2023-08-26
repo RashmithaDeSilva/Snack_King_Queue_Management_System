@@ -1,8 +1,5 @@
 package Task_1;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Scanner;
 
 
@@ -43,7 +40,7 @@ public class SnackKingQueueManagementSystem implements Serializable {
                     SKQMS_obj.storeProgramDataIntoFile(SKQMS_obj);
                     break;
                 case "107", "LPD":
-                    System.out.println("107");
+                    SKQMS_obj = SKQMS_obj.loadProgramDataFromFile();
                     break;
                 case "108", "STK":
                     System.out.println("108");
@@ -499,14 +496,25 @@ public class SnackKingQueueManagementSystem implements Serializable {
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
                 objectOutputStream.writeObject(SKQMS);
                 System.out.println("\tSuccessfully save data into file");
+
         } catch (IOException e) {
-            System.out.println("\terror occurred try again !");
+            System.out.println("\tError occurred try again !");
         }
     }
 
 
-    
+    // Load program data from file (107 or LPD)
+    private SnackKingQueueManagementSystem loadProgramDataFromFile() {
+        try (FileInputStream fileInputStream = new FileInputStream("Data-file.txt");
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            System.out.println("\tSuccessfully load data from file");
+            return (SnackKingQueueManagementSystem) objectInputStream.readObject();
 
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("\tError occurred try again !");
+            return null;
+        }
+    }
 
 
 
