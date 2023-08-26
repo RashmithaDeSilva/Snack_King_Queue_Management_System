@@ -1,5 +1,6 @@
 package Task_1;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SnackKingQueueManagementSystem {
@@ -30,10 +31,10 @@ public class SnackKingQueueManagementSystem {
                     SKQMS_obj.removeCustometr();
                     break;
                 case "104", "PCQ":
-                    //SKQMS_obj.removeServedCustometr();
+                    SKQMS_obj.removeServedCustometr();
                     break;
                 case "105", "VCS":
-                    System.out.println("105");
+                    SKQMS_obj.sortedNames();
                     break;
                 case "106", "SPD":
                     System.out.println("106");
@@ -360,7 +361,7 @@ public class SnackKingQueueManagementSystem {
     }
 
 
-    // 104 or PCQ:	Remove a served customer ---------------------------------------------------------------------------
+    // Remove a served customer (104 or PCQ) ---------------------------------------------------------------------------
     private void removeServedCustometr() {
         printWindowName("Remove a Customer from a Queue");
         boolean loopbreack = true;
@@ -452,6 +453,40 @@ public class SnackKingQueueManagementSystem {
     }
 
 
+    // View customer sorted in alphabetical order (105 or VCS) ---------------------------------------------------------
+    private void sortedNames() {
+        System.out.print("Queue 1:\t");
+        sortArray(q1);
 
+        System.out.print("Queue 2:\t");
+        sortArray(q2);
+
+        System.out.print("Queue 3:\t");
+        sortArray(q3);
+    }
+
+
+    // Sort Array ------------------------------------------------------------------------------------------------------
+    private void sortArray(String[] array) {
+        String[] tempArray = new String[array.length];
+        for (int i=0;i<tempArray.length;i++) {
+            tempArray[i] = array[i] != null ? array[i].toUpperCase() : "";
+        }
+        for (int j=0;j<tempArray.length;j++) {
+            for (int i=j+1;i<tempArray.length; i++) {
+                if (tempArray[i].compareTo(tempArray[j]) < 0) {
+                    String temp = tempArray[j];
+                    tempArray[j] = tempArray[i];
+                    tempArray[i] = temp;
+                }
+            }
+        }
+        for (String s : tempArray) {
+            if (!s.isEmpty()) {
+                System.out.print(s + "\t");
+            }
+        }
+        System.out.println("\n");
+    }
 
 }
