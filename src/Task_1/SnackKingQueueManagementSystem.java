@@ -483,7 +483,7 @@ public class SnackKingQueueManagementSystem implements Serializable {
     }
 
 
-    // View remaining pizza stock (108 or STK)
+    // View remaining pizza stock (108 or STK) -------------------------------------------------------------------------
     private void viewRemainingPizzaStock() {
         System.out.println("\tRemaining pizza stock: " + pizzaStock);
     }
