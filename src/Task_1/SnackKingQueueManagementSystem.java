@@ -8,7 +8,7 @@ public class SnackKingQueueManagementSystem implements Serializable {
     private String[] q1 = new String[2];
     private String[] q2 = new String[3];
     private String[] q3 = new String[5];
-    private int pizzaCount = 100;
+    private int pizzaStock = 100;
 
     // Main method -----------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class SnackKingQueueManagementSystem implements Serializable {
                     SKQMS_obj = SKQMS_obj.loadProgramDataFromFile();
                     break;
                 case "108", "STK":
-                    System.out.println("108");
+                    SKQMS_obj.viewRemainingPizzaStock();
                     break;
                 case "109", "AFS":
                     System.out.println("109");
@@ -368,82 +368,48 @@ public class SnackKingQueueManagementSystem implements Serializable {
 
         while (loopbreack) {
             int queueNumber = getIntInput("\nEnter queue number:\t");
-            int customerNumber = -1;
-            if (queueNumber > 0 && queueNumber < 4) {
-                customerNumber = getIntInput("Enter customer number:\t");
-            }
 
             if (queueNumber == 1) {
-                if (customerNumber == -1) {
-                } else if ((customerNumber-1) > q1.length || 0 > (customerNumber-1)) {
-                    System.out.println("\tInvalid customer number !\n");
-                } else {
-                    if (q1[customerNumber-1] == null) {
-                        System.out.println("\tThis position is already empty");
+                for (int i=0;i<q1.length;i++) {
+                    if (i == 0) {
+                        q1[i] = null;
 
-                    } else {
-                        for (int i=0;i<q1.length;i++) {
-                            if (i == (customerNumber-1)) {
-                                q1[i] = null;
-
-                            } else if (i < (q1.length-1) && 0 < i && q1[i] != null && q1[i-1] == null) {
-                                q1[i-1] = q1[i];
-                            }
-                        }
-                        q1[q1.length-1] = null;
-                        pizzaCount -= 10;
-                        System.out.println("\tSuccessfully remove served customer");
+                    } else if (i < q1.length - 1 && q1[i] != null && q1[i - 1] == null) {
+                        q1[i-1] = q1[i];
                     }
-                    loopbreack = false;
                 }
+                q1[q1.length-1] = null;
+                pizzaStock -= 10;
+                System.out.println("\tSuccessfully remove served customer");
+                loopbreack = false;
 
             } else if (queueNumber == 2) {
-                if (customerNumber == -1) {
-                } else if ((customerNumber-1) > q2.length || 0 > (customerNumber-1)) {
-                    System.out.println("\tInvalid customer number !\n");
-                } else {
-                    if (q2[customerNumber-1] == null) {
-                        System.out.println("\tThis position is already empty");
+                for (int i=0;i<q2.length;i++) {
+                    if (i == 0) {
+                        q2[i] =null;
 
-                    } else {
-                        for (int i=0;i<q2.length;i++) {
-                            if (i == (customerNumber-1)) {
-                                q2[i] =null;
-
-                            } else if (i < (q2.length-1) && 0 < i && q2[i] != null && q2[i-1] == null) {
-                                q2[i-1] = q2[i];
-                            }
-                        }
-                        q2[q2.length-1] = null;
-                        pizzaCount -= 10;
-                        System.out.println("\tSuccessfully remove served customer");
+                    } else if (i < q2.length - 1 && q2[i] != null && q2[i - 1] == null) {
+                        q2[i-1] = q2[i];
                     }
-                    loopbreack = false;
                 }
+                q2[q2.length-1] = null;
+                pizzaStock -= 10;
+                System.out.println("\tSuccessfully remove served customer");
+                loopbreack = false;
 
             } else if (queueNumber == 3) {
-                if (customerNumber == -1) {
-                } else if ((customerNumber-1) > q3.length || 0 > (customerNumber-1)) {
-                    System.out.println("\tInvalid customer number !\n");
-                } else {
-                    if (q3[customerNumber-1] == null) {
-                        System.out.println("\tThis position is already empty");
+                for (int i=0;i<q3.length;i++) {
+                    if (i == 0) {
+                        q3[i] = null;
 
-                    } else {
-                        for (int i=0;i<q3.length;i++) {
-                            if (i == (customerNumber-1)) {
-                                q3[i] = null;
-
-                            } else if (i < (q3.length-1) && 0 < i && q3[i] != null && q3[i-1] == null) {
-                                q3[i-1] = q3[i];
-                            }
-                        }
-                        q3[q3.length-1] = null;
-                        pizzaCount -= 10;
-                        System.out.println("\tSuccessfully remove served customer");
+                    } else if (i < q3.length - 1 && q3[i] != null && q3[i - 1] == null) {
+                        q3[i-1] = q3[i];
                     }
-                    loopbreack = false;
                 }
+                q3[q3.length-1] = null;
+                pizzaStock -= 10;
+                System.out.println("\tSuccessfully remove served customer");
+                loopbreack = false;
 
             } else if (queueNumber == -1) {
             } else {
@@ -517,6 +483,10 @@ public class SnackKingQueueManagementSystem implements Serializable {
     }
 
 
+    // View remaining pizza stock (108 or STK)
+    private void viewRemainingPizzaStock() {
+        System.out.println("\tRemaining pizza stock: " + pizzaStock);
+    }
 
 
 
