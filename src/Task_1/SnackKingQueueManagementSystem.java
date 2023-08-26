@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class SnackKingQueueManagementSystem {
 
-    private Boolean[] q1 = {false, false};
-    private Boolean[] q2 = {false, false, false};
-    private Boolean[] q3 = {false, false, false, false, false};
+    private boolean[] q1 = {false, false};
+    private boolean[] q2 = {false, false, false};
+    private boolean[] q3 = {false, false, false, false, false};
 
     // Main method -----------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class SnackKingQueueManagementSystem {
                     SKQMS_obj.viewAllQueues();
                     break;
                 case "101", "VEQ":
-                    System.out.println("101");
+                    SKQMS_obj.viewAllEmptyQueues();
                     break;
                 case "102", "ACQ":
                     System.out.println("102");
@@ -113,24 +113,46 @@ public class SnackKingQueueManagementSystem {
         System.out.println("\t\t\t\t\t\t\t----------");
         for (int i=0;i<q3.length;i++) {
             if (i<2) {
-                System.out.print(q1[i] ? "\t\t\t\t\t\t\tX\t" : "\t\t\t\t\t\t\tO\t");
-                System.out.print(q2[i] ? "X\t" : "O\t");
-                System.out.print(q3[i] ? "X\t" : "O\t");
+                System.out.print(q1[i] ? "\t\t\t\t\t\t\tO\t" : "\t\t\t\t\t\t\tX\t");
+                System.out.print(q2[i] ? "O\t" : "X\t");
+                System.out.print(q3[i] ? "O\t" : "X\t");
 
             } else if (i == 2) {
                 System.out.print("\t\t\t\t\t\t\t \t");
-                System.out.print(q2[i] ? "X\t" : "O\t");
-                System.out.print(q3[i] ? "X\t" : "O\t");
+                System.out.print(q2[i] ? "O\t" : "X\t");
+                System.out.print(q3[i] ? "O\t" : "X\t");
 
             } else {
                 System.out.print("\t\t\t\t\t\t\t \t");
                 System.out.print(" \t");
-                System.out.print(q3[i] ? "X\t" : "O\t");
+                System.out.print(q3[i] ? "O\t" : "X\t");
             }
             System.out.println();
         }
     }
 
 
-
+    // View all empty queues (101 or VFQ)
+    private void viewAllEmptyQueues() {
+        printWindowName("View All Empty Queues ");
+        System.out.print("\t\t\tQueues 1:\t");
+        for (int i=0;i< q1.length;i++) {
+            if (!q1[i]){
+                System.out.print(i+1 + ",\t");
+            }
+        }
+        System.out.print("\n\t\t\tQueues 2:\t");
+        for (int i=0;i< q2.length;i++) {
+            if (!q2[i]){
+                System.out.print(i+1 + ",\t");
+            }
+        }
+        System.out.print("\n\t\t\tQueues 3:\t");
+        for (int i=0;i< q3.length;i++) {
+            if (!q3[i]){
+                System.out.print(i+1 + ",\t");
+            }
+        }
+        System.out.println();
+    }
 }
