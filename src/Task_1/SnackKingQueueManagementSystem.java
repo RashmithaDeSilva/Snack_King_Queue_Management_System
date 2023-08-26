@@ -415,6 +415,10 @@ public class SnackKingQueueManagementSystem implements Serializable {
             } else {
                 System.out.println("Invalid queue number !");
             }
+
+            if (pizzaStock <= 20) {
+                System.out.println("\tWarning : Pizza stock is low. Refill the stock");
+            }
         }
     }
 
@@ -505,5 +509,4 @@ public class SnackKingQueueManagementSystem implements Serializable {
             }
         }
     }
-
 }
