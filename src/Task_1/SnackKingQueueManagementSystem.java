@@ -23,7 +23,7 @@ public class SnackKingQueueManagementSystem {
                     SKQMS_obj.viewAllEmptyQueues();
                     break;
                 case "102", "ACQ":
-                    System.out.println("102");
+                    SKQMS_obj.addCustomer();
                     break;
                 case "103", "RCQ":
                     System.out.println("103");
@@ -106,6 +106,19 @@ public class SnackKingQueueManagementSystem {
     }
 
 
+    // Get int user input -------------------------------------------------------------------------------------------
+    private int getIntInput(String inputLabelName) {
+        System.out.print(inputLabelName);
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter an integer !");
+            return -1;
+        }
+    }
+
+
     // View all queues (100 or VFQ)
     private void viewAllQueues() {
         printWindowName("View All Queues ");
@@ -154,5 +167,69 @@ public class SnackKingQueueManagementSystem {
             }
         }
         System.out.println();
+    }
+
+
+    // Add customer to a queue (102 or ACQ)
+    private void addCustomer() {
+        printWindowName("Add Customer to a Queue ");
+        boolean loopbreack = true;
+
+        while (loopbreack) {
+            int queueNumber = getIntInput("\nEnter queue number:\t");
+            boolean loopbreack2 = false;
+
+            if (queueNumber == 1) {
+                for (int i=0;i<q1.length;i++) {
+                    if (!q1[i]) {
+                        q1[i] = true;
+                        System.out.println("\tSuccessfully add customer\n");
+                        loopbreack2 = false;
+                        break;
+                    }
+                    if (q1[q1.length-1]) {
+                        System.out.println("\tThis queue is full try another queue !");
+                        loopbreack2 = true;
+                        break;
+                    }
+                }
+                loopbreack = loopbreack2;
+
+            } else if (queueNumber == 2) {
+                for (int i=0;i<q2.length;i++) {
+                    if (!q2[i]) {
+                        q2[i] = true;
+                        System.out.println("\tSuccessfully add customer\n");
+                        loopbreack2 = false;
+                        break;
+                    }
+                    if (q2[q2.length-1]) {
+                        System.out.println("\tThis queue is full try another queue !");
+                        break;
+                    }
+                }
+                loopbreack = loopbreack2;
+
+            } else if (queueNumber == 3) {
+                for (int i=0;i<q3.length;i++) {
+                    if (!q3[i]) {
+                        q3[i] = true;
+                        System.out.println("\tSuccessfully add customer\n");
+                        loopbreack2 = false;
+                        break;
+                    }
+                    if (q3[q3.length-1]) {
+                        System.out.println("\tThis queue is full try another queue !");
+                        break;
+                    }
+                }
+                loopbreack = loopbreack2;
+
+            } else if (queueNumber == -1) {
+            } else {
+                System.out.println("Invalid queue number !");
+            }
+        }
+
     }
 }
