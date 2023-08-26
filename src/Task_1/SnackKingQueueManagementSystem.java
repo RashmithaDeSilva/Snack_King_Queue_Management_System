@@ -46,7 +46,7 @@ public class SnackKingQueueManagementSystem implements Serializable {
                     SKQMS_obj.viewRemainingPizzaStock();
                     break;
                 case "109", "AFS":
-                    System.out.println("109");
+                    SKQMS_obj.addPizzaToStock();
                     break;
                 case "999", "EXT":
                     runProgram = false;
@@ -458,7 +458,7 @@ public class SnackKingQueueManagementSystem implements Serializable {
 
     // Store program data into file (106 or SPD) -----------------------------------------------------------------------
     private void storeProgramDataIntoFile(SnackKingQueueManagementSystem SKQMS) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream("Data-file.txt");
+        try (FileOutputStream fileOutputStream = new FileOutputStream("Data-File.txt");
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
                 objectOutputStream.writeObject(SKQMS);
                 System.out.println("\tSuccessfully save data into file");
@@ -471,7 +471,7 @@ public class SnackKingQueueManagementSystem implements Serializable {
 
     // Load program data from file (107 or LPD)
     private SnackKingQueueManagementSystem loadProgramDataFromFile() {
-        try (FileInputStream fileInputStream = new FileInputStream("Data-file.txt");
+        try (FileInputStream fileInputStream = new FileInputStream("Data-File.txt");
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             System.out.println("\tSuccessfully load data from file");
             return (SnackKingQueueManagementSystem) objectInputStream.readObject();
@@ -489,5 +489,21 @@ public class SnackKingQueueManagementSystem implements Serializable {
     }
 
 
+    // Add pizza to stock (109 or AFS) ---------------------------------------------------------------------------------
+    private void addPizzaToStock() {
+        boolean loopbreack = true;
+        while (loopbreack) {
+            int stockCount = getIntInput("\nEnter stock count: ");
+            if (stockCount == -1) {
+            } else if (stockCount < -1) {
+                System.out.println("\tInvalid number enter !");
+
+            } else {
+                pizzaStock += stockCount;
+                System.out.println("Successfully update stock");
+                loopbreack = false;
+            }
+        }
+    }
 
 }
