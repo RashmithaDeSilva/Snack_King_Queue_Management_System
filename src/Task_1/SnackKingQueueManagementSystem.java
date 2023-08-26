@@ -16,6 +16,9 @@ public class SnackKingQueueManagementSystem {
 
         while (runProgram) {
             switch (SKQMS_obj.mainMenu()) {
+                case "100", "VFQ":
+                    SKQMS_obj.viewAllQueues();
+                    break;
                 case "101", "VEQ":
                     System.out.println("101");
                     break;
@@ -48,6 +51,7 @@ public class SnackKingQueueManagementSystem {
                     break;
                 default:
                     System.out.println("This input is invalid !");
+                    break;
             }
         }
 
@@ -74,11 +78,11 @@ public class SnackKingQueueManagementSystem {
 
     // Print window name -----------------------------------------------------------------------------------------------
     private void printWindowName(String windowName) {
-        for (int i=0;i<80;i++) {
+        for (int i=0;i<70;i++) {
             System.out.print("*");
         }
         System.out.print("\n*");
-        int len = 39 - (windowName.length()/2);
+        int len = 34 - (windowName.length()/2);
         for (int i=0;i<len;i++) {
             System.out.print(" ");
         }
@@ -87,7 +91,7 @@ public class SnackKingQueueManagementSystem {
             System.out.print(" ");
         }
         System.out.print("*\n");
-        for (int i=0;i<80;i++) {
+        for (int i=0;i<70;i++) {
             System.out.print("*");
         }
         System.out.println();
@@ -105,8 +109,28 @@ public class SnackKingQueueManagementSystem {
     // View all queues (100 or VFQ)
     private void viewAllQueues() {
         printWindowName("View All Queues ");
+        System.out.println("\t\t\t\t\t\t\tQ1\tQ2\tQ3");
+        System.out.println("\t\t\t\t\t\t\t----------");
         for (int i=0;i<q3.length;i++) {
-            
+            if (i<2) {
+                System.out.print(q1[i] ? "\t\t\t\t\t\t\tX\t" : "\t\t\t\t\t\t\tO\t");
+                System.out.print(q2[i] ? "X\t" : "O\t");
+                System.out.print(q3[i] ? "X\t" : "O\t");
+
+            } else if (i == 2) {
+                System.out.print("\t\t\t\t\t\t\t \t");
+                System.out.print(q2[i] ? "X\t" : "O\t");
+                System.out.print(q3[i] ? "X\t" : "O\t");
+
+            } else {
+                System.out.print("\t\t\t\t\t\t\t \t");
+                System.out.print(" \t");
+                System.out.print(q3[i] ? "X\t" : "O\t");
+            }
+            System.out.println();
         }
     }
+
+
+
 }
